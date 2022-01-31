@@ -1,10 +1,10 @@
 * Spring 2022 235 Assignments
 
-* Last name:
+* Last name: Uddin
 
-* First name:
+* First name: Ashfak
 
-* GitHub username:
+* GitHub username: ashfaku
 
 * Notes:
 
