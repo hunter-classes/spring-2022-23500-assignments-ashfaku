@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ashfak's 235 Notes</title>
+	<style>
+		code
+		{
+			font-size: 4em;
+		}
+		.one 
+		{
+			text-indent: 4em;
+		}
+		.two
+		{
+			text-indent: 8em;
+		}
+		.three
+		{
+			text-indent: 12em;
+		}
+	</style>
+	<script src="https://kit.fontawesome.com/0137bf0349.js" crossorigin="anonymous"></script>
+	<script>
+		function init()
+		{
+			
+		}
+	</script>
+</head>
+<body onload = "init()">
+	<div>
+		<h1>Memoization</h1>
+		<p>
+			<h2>-The process of storing already calculated values into an array or some data structure so you don't have to calculate them again.</h2>
+			<h3>This code works, but it gets really slow once n reaches the high 20s and beyond.</h3>
+			<code>
+				<div>int stepPerms(int n)</div>
+				<div>{</div>
+					<div class = "one">if (n < 1)</div>
+						<div class = "two">return 0;</div>
+					<div class = "one">if (n < 3)</div>
+						<div class = "two">return n;</div>
+					<div class = "one">if (n == 3)</div>
+						<div class = "two">return 4;</div>
+					<div class = "one">return stepPerms(n - 1) + stepPerms(n - 2) + stepPerms(n - 3);</div>
+				<div>}</div>
+				
+			</code>
+			<h3>On the other hand, this code is similar, but is way more efficient, because the solutions array lets the recursive function add less to the stack.</h3>
+
+		</p>
+	</div>
+</body>
+</html>
+	
