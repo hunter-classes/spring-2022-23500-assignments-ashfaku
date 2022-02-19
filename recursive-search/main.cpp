@@ -103,7 +103,7 @@ int main()
 	bool check = false;
 	printBoard(arr);
 	cout << 0 << " " << 0 << endl;
-	solve(arr, solu, check, 0, 0);
+	solve(arr, solu, check, 2, 1);
 	std::cout << "Done!\n";
 	return 0;
 }
