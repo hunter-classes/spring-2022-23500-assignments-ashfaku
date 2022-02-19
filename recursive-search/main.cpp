@@ -25,63 +25,30 @@ bool checkLayout(int a[4][4], int b[4][4])
 	}
 	return true;
 }
-void solve(int setup[4][4], int solution[4][4], bool& check, int row, int col)
+void solve(int setup[4][4], int solution[4][4], bool& check, int& row, int& col, int& a, int& b)
 {
 	if (checkLayout(setup, solution))
 	{
-		cout << "HUH" << endl;
 		check = true;
 		return;
 	}
-	if (row < 3)
-	{
-		int i = setup[row+1][col] - 1, r = i/4, c = i%4;
-		if (r <= row || c != col)
-		{
-			setup[row][col] = setup[row+1][col];
-			setup[row+1][col] = 0;
-			printBoard(setup);
-                        usleep(80000);
-			solve(setup, solution, check, row+1, col);
-		}
-	}
-	if (col < 3)
-	{
-		int i = setup[row][col + 1] - 1, r = i/4, c = i%4;
-		if (col >= c || row != r)
-		{
-			setup[row][col] = setup[row][col+1];
-			setup[row][col + 1] = 0;
-			printBoard(setup);
-                        usleep(80000);
-			solve(setup, solution, check, row, col+1);
-		}
-	}
-	if (row > 0)
-        {
-              int i = setup[row-1][col] - 1, r = i/4, c = i%4;
-              if (r > row)
-              {
-                        setup[row][col] = setup[row-1][col];
-                        setup[row-1][col] = 0;
-                        printBoard(setup);
-                        usleep(80000);
-                        solve(setup, solution, check, row-1, col);
-              }
-        }
-	if (col > 0)
-	{
-		int i = setup[row][col-1] - 1, r = i/4, c = i%4;
-		if (col <= c)
-		{
-			setup[row][col] = setup[row][col-1];
-			setup[row][col-1] = 0;
-			printBoard(setup);
-			usleep(80000);
-			solve(setup, solution, check, row, col-1);
-		}
-	}
-	cout << "WTF" << endl;
+	if (a > 3 || a < 0 || b > 3 || b < 0)
+		return;
+	setup[row][col] = setup[a][b];
+	setup[a][b] = 0;
+	row = a;
+	col = b;
+	printBoard(setup);
+	cout << a << " " << b << endl;
+	usleep(80000);
+	if (!check)
+		solve(setup, solution, check, row, col, row, --col);
+	if (!check)
+		solve(setup, solution, check, row, col, --row, col);
+	if (!check)
+		solve(setup, solution, check, row, col, ++row, col);
+	if (!check)
+		solve(setup, solution, check, row, col, row, ++col);
 }
 int main()
 {
@@ -99,11 +66,11 @@ int main()
 		{9, 10, 11, 12},
 		{13, 14, 15, 0}
 	};
+	int r = 2, c = 1, cc = 2;
 	std::cout << ";\n";
 	bool check = false;
 	printBoard(arr);
-	cout << 0 << " " << 0 << endl;
-	solve(arr, solu, check, 2, 1);
+	solve(arr, solu, check, r, c, r, cc);
 	std::cout << "Done!\n";
 	return 0;
 }
