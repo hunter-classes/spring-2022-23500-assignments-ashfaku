@@ -72,7 +72,7 @@ void solve(int setup[4][4], int solution[4][4], bool& check, int row, int col)
 	if (col > 0)
 	{
 		int i = setup[row][col-1] - 1, r = i/4, c = i%4;
-		if (col < c)
+		if (col <= c)
 		{
 			setup[row][col] = setup[row][col-1];
 			setup[row][col-1] = 0;
@@ -81,15 +81,16 @@ void solve(int setup[4][4], int solution[4][4], bool& check, int row, int col)
 			solve(setup, solution, check, row, col-1);
 		}
 	}
+	cout << "WTF" << endl;
 }
 int main()
 {
 	int arr[4][4] =
 	{
-		{0, 1, 3, 14},
-		{5, 8, 6, 7},
-		{9, 4, 11, 13},
-		{2, 10, 15, 12}
+		{13, 2, 10, 3},
+		{1, 12, 8, 4},
+		{5, 0, 9, 6},
+		{15, 14, 11, 7}
 	};
 	int solu[4][4] =
 	{
