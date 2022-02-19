@@ -70,6 +70,7 @@ int main()
 	std::cout << ";\n";
 	bool check = false;
 	printBoard(arr);
+	//swapping 2, 1 with 2,2 to begin with
 	solve(arr, solu, check, r, c, r, cc);
 	std::cout << "Done!\n";
 	return 0;
