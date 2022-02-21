@@ -29,7 +29,7 @@ bool checkLayout(vector<vector<int>> a, int b[4][4])
 }
 bool checkMove(vector<vector<vector<int>>>& l, vector<vector<int>> setup)
 {
-	if (l.size() > 10)
+	if (l.size() > 5)
 		l.erase(l.begin());
 	for (int i = 0; i < l.size(); i++)
 	{
@@ -58,7 +58,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		return;
 	setup[row][col] = setup[a][b];
 	setup[a][b] = 0;
-	int rh = row, ch = col;
+	int rh = row, ch = col; // to hold the value of row/col if i wanna undo the swap
 	row = a;
 	col = b;
 	printBoard(setup);
@@ -68,9 +68,11 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		setup[row][col] = setup[rh][ch];
         	setup[rh][ch] = 0;
         	row = rh;
-        	col = ch;
+        	col = ch; // to undo the swap and try another direction?
+		printBoard(setup);
+		usleep(80000);
                 solve(setup, solution, check, row, col, row, col + 1, c);
-                return;
+		return;
         }
 	usleep(80000);
 	if (!check)
