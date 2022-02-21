@@ -27,7 +27,27 @@ bool checkLayout(vector<vector<int>> a, int b[4][4])
 	}
 	return true;
 }
-void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row, int& col, int a, int b)
+bool checkMove(vector<vector<vector<int>>>& l, vector<vector<int>> setup)
+{
+	if (l.size() > 10)
+		l.erase(l.begin());
+	for (int i = 0; i < l.size(); i++)
+	{
+		int counter = 0;
+		for (int j = 0; j < 4; j++)
+		{
+			for (int k = 0; k < 4; k++)
+			{
+				if (setup[j][k] == l[i][j][k])
+					counter++;
+			}
+		}
+		if (counter == 16) // if the board entirely matches with one in the vector
+				return true;
+	}
+	return false;
+}
+void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row, int& col, int a, int b, vector<vector<vector<int>>>& c)
 {
 	if (checkLayout(setup, solution))
 	{
@@ -38,22 +58,36 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		return;
 	setup[row][col] = setup[a][b];
 	setup[a][b] = 0;
+	int rh = row, ch = col;
 	row = a;
 	col = b;
 	printBoard(setup);
 	cout << row << " " << col << endl;
+	if (checkMove(c, setup) && !check)
+        {
+		setup[row][col] = setup[rh][ch];
+        	setup[rh][ch] = 0;
+        	row = rh;
+        	col = ch;
+                solve(setup, solution, check, row, col, row, col + 1, c);
+                return;
+        }
 	usleep(80000);
 	if (!check)
-		solve(setup, solution, check, row, col, row, col - 1);
+		c.push_back(setup);
 	if (!check)
-		solve(setup, solution, check, row, col, row - 1, col);
+		solve(setup, solution, check, row, col, row, col - 1, c);
 	if (!check)
-		solve(setup, solution, check, row, col, row + 1, col);
+		solve(setup, solution, check, row, col, row - 1, col, c);
 	if (!check)
-		solve(setup, solution, check, row, col, row, col + 1);
+		solve(setup, solution, check, row, col, row + 1, col, c);
+	if (!check)
+		solve(setup, solution, check, row, col, row, col + 1, c);
+	cout << "idk man" << endl;
 }
 int main()
 {
+	vector<vector<vector<int>>> list;
 	vector<vector<int>> arr;
 	vector<int> a, b, e, d;
 	a.push_back(13);
@@ -88,7 +122,7 @@ int main()
 	bool check = false;
 	printBoard(arr);
 	//swapping 2, 1 with 2,2 to begin with
-	solve(arr, solu, check, r, c, r, cc);
+	solve(arr, solu, check, r, c, r, cc, list);
 	std::cout << "Done!\n";
 	return 0;
 }
