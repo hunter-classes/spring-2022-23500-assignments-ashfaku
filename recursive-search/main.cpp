@@ -114,8 +114,8 @@ int main()
 	e.push_back(10);
 	e.push_back(11);
 	e.push_back(8);
-	d.push_back(14);
 	d.push_back(13);
+	d.push_back(14);
 	d.push_back(15);
 	d.push_back(12);
 	arr.push_back(a);
