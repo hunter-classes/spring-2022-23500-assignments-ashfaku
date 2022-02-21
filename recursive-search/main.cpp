@@ -29,7 +29,7 @@ bool checkLayout(vector<vector<int>> a, int b[4][4])
 }
 bool checkMove(vector<vector<vector<int>>>& l, vector<vector<int>> setup)
 {
-	if (l.size() > 5)
+	if (l.size() > 2)
 		l.erase(l.begin());
 	for (int i = 0; i < l.size(); i++)
 	{
@@ -55,6 +55,16 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		return;
 	}
 	if (a > 3 || a < 0 || b > 3 || b < 0)
+		return;
+	int rowCount = 0, colCount = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (setup[a][i] == solution[a][i])
+			rowCount++;
+		if (setup[i][b] == solution[i][b])
+			colCount++;
+	}
+	if (rowCount == 4 || colCount == 4) // to check if the row im wanting to swap with is already done?
 		return;
 	setup[row][col] = setup[a][b];
 	setup[a][b] = 0;
@@ -85,7 +95,6 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		solve(setup, solution, check, row, col, row + 1, col, c);
 	if (!check)
 		solve(setup, solution, check, row, col, row, col + 1, c);
-	cout << "idk man" << endl;
 }
 int main()
 {
@@ -119,12 +128,12 @@ int main()
 		{9, 10, 11, 12},
 		{13, 14, 15, 0}
 	};
-	int r = 2, c = 1, cc = 2;
+	int r = 3, c = 1;
 	std::cout << ";\n";
 	bool check = false;
 	printBoard(arr);
 	//swapping 2, 1 with 2,2 to begin with
-	solve(arr, solu, check, r, c, r, cc, list);
+	solve(arr, solu, check, r, c, 3, c+1, list);
 	std::cout << "Done!\n";
 	return 0;
 }
