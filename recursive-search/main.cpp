@@ -52,6 +52,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 	if (checkLayout(setup, solution))
 	{
 		check = true;
+		printBoard(setup);
 		return;
 	}
 	if (a > 3 || a < 0 || b > 3 || b < 0)
@@ -101,22 +102,22 @@ int main()
 	vector<vector<vector<int>>> list;
 	vector<vector<int>> arr;
 	vector<int> a, b, e, d;
-	a.push_back(13);
+	a.push_back(0);
+	a.push_back(1);
 	a.push_back(2);
-	a.push_back(10);
 	a.push_back(3);
-	b.push_back(1);
-	b.push_back(12);
-	b.push_back(8);
+	b.push_back(5);
+	b.push_back(6);
+	b.push_back(7);
 	b.push_back(4);
-	e.push_back(5);
-	e.push_back(0);
 	e.push_back(9);
-	e.push_back(6);
-	d.push_back(15);
+	e.push_back(10);
+	e.push_back(11);
+	e.push_back(8);
+	d.push_back(13);
 	d.push_back(14);
-	d.push_back(11);
-	d.push_back(7);
+	d.push_back(15);
+	d.push_back(12);
 	arr.push_back(a);
 	arr.push_back(b);
 	arr.push_back(e);
@@ -128,14 +129,15 @@ int main()
 		{9, 10, 11, 12},
 		{13, 14, 15, 0}
 	};
-	int r = 3, c = 1;
+	int r = 0, c = 0;
 	std::cout << ";\n";
 	bool check = false;
 	printBoard(arr);
 	//swapping 2, 1 with 2,2 to begin with
-	solve(arr, solu, check, r, c, 3, c+1, list);
+	solve(arr, solu, check, r, c, r+1, c, list);
 	std::cout << "Done!\n";
 	return 0;
 }
 
 
+setup,
