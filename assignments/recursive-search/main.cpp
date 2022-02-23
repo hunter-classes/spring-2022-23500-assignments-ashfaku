@@ -76,6 +76,42 @@ bool checkMove(vector<vector<vector<int>>>& l, vector<vector<int>> setup)
 	}
 	return false;
 }
+int getInvCount(vector<int> arr)
+{
+	int inv_count = 0;
+	for (int i = 0; i < 4 * 4 - 1; i++)
+	{
+		for (int j = i + 1; j < 4 * 4; j++)
+		{
+			if (arr[j] && arr[i] && arr[i] > arr[j])
+				inv_count++;
+		}
+	}
+	return inv_count;
+}
+int findXPosition(vector<vector<int>> puzzle)
+{
+	for (int i = 4 - 1; i >= 0; i--)
+		for (int j = 4 - 1; j >= 0; j--)
+			if (puzzle[i][j] == 0)
+				return 4 - i;
+	return -1;
+}
+bool isSolvable(vector<vector<int>> puzzle)
+{
+	int invCount = getInvCount(puzzle[0]);
+	if (4 & 1)
+		return !(invCount & 1);
+	else
+	{
+		int pos = findXPosition(puzzle);
+		if (pos & 1)
+			return !(invCount & 1);
+		else
+			return invCount & 1;
+	}
+}
+// i feel like there's
 void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row, int& col, int a, int b, vector<vector<vector<int>>>& c)
 {
 	if (checkLayout(setup, solution))
@@ -84,6 +120,8 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		printBoard(setup, solution);
 		return;
 	}
+	//if(!isSolvable(setup)) .... this base case logic seems to be flawed for some reason, i'd need more time to figure out why
+	//	return;
 	if (a > 3 || a < 0 || b > 3 || b < 0)
 		return;
 	int rowCount = 0, colCount = 0;
@@ -96,7 +134,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 	}
 	if (rowCount == 4)
 	{
-		// to check if the row im wanting to swap with is already done
+		// to check if the row im wanting to swap with is already done?
 		if (a == row - 1)
 			solve(setup, solution, check, row, col, row+1, col, c);
 		else
@@ -105,6 +143,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 	}
 	if (colCount == 4)
 	{
+		// to check if the col im wanting to swap with is already done?
 		if (b == col - 1)
 			solve(setup, solution, check, row, col, row, col+1, c);
 		else
@@ -122,7 +161,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		setup[row][col] = setup[rh][ch];
         	setup[rh][ch] = 0;
         	row = rh;
-        	col = ch; // to undo the swap and try another direction?
+        	col = ch; // to undo the swap and try another direction? although this could create a infinite loop if im swapping in the same direction again at times...
 		printBoard(setup, solution);
 		usleep(80000);
                 solve(setup, solution, check, row, col, row, col + 1, c);
@@ -130,15 +169,17 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
         }
 	usleep(80000);
 	if (!check)
-		c.push_back(setup);
+		c.push_back(setup); // to save the state of the board? this doesnt always look to properly work though
+
+	// recursively call the function on the 4 surrounding squares of the 0, counter clockwise starting from the left
 	if (!check)
 		solve(setup, solution, check, row, col, row, col - 1, c);
 	if (!check)
 		solve(setup, solution, check, row, col, row - 1, col, c);
 	if (!check)
-		solve(setup, solution, check, row, col, row + 1, col, c);
+		solve(setup, solution, check, row, col, row , col+1, c);
 	if (!check)
-		solve(setup, solution, check, row, col, row, col + 1, c);
+		solve(setup, solution, check, row, col, row+1, col, c);
 }
 int main()
 {
@@ -178,6 +219,6 @@ int main()
 	printBoard(arr, solu);
 	//swapping 0, 0 with 1,0 to begin with
 	solve(arr, solu, check, r, c, r, c+1, list);
-	std::cout << "Done!\n";
+	std::cout << "\nDone!\n";
 	return 0;
 }
