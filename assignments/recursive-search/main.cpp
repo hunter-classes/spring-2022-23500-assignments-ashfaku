@@ -44,7 +44,7 @@ void printBoard(vector<vector<int>> a, int solu[4][4])
 	}
 	for (int i = 0; i < 4; i++)
 		printf("+----");
-	printf("+\n--------------------------------------------------");
+	printf("+\n--------------------------------------------------\n");
 }
 bool checkLayout(vector<vector<int>> a, int b[4][4])
 {
@@ -111,7 +111,7 @@ bool isSolvable(vector<vector<int>> puzzle)
 			return invCount & 1;
 	}
 }
-// i feel like there's
+// idek
 void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row, int& col, int a, int b, vector<vector<vector<int>>>& c)
 {
 	if (checkLayout(setup, solution))
@@ -132,7 +132,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 		if (setup[i][b] == solution[i][b])
 			colCount++;
 	}
-	if (rowCount == 4)
+	if (rowCount == 4 && !check)
 	{
 		// to check if the row im wanting to swap with is already done?
 		if (a == row - 1)
@@ -141,7 +141,7 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 			solve(setup, solution, check, row, col, row-1, col, c);
 		return;
 	}
-	if (colCount == 4)
+	if (colCount == 4 && !check)
 	{
 		// to check if the col im wanting to swap with is already done?
 		if (b == col - 1)
@@ -177,35 +177,42 @@ void solve(vector<vector<int>> setup, int solution[4][4], bool& check, int& row,
 	if (!check)
 		solve(setup, solution, check, row, col, row - 1, col, c);
 	if (!check)
-		solve(setup, solution, check, row, col, row , col+1, c);
+		solve(setup, solution, check, row, col, row +1, col, c);
 	if (!check)
-		solve(setup, solution, check, row, col, row+1, col, c);
+		solve(setup, solution, check, row, col, row, col+1, c);
 }
 int main()
 {
 	vector<vector<vector<int>>> list;
 	vector<vector<int>> arr;
 	vector<int> a, b, e, d;
-	a.push_back(5);
+	a.push_back(0);
 	a.push_back(1);
 	a.push_back(2);
 	a.push_back(3);
-	b.push_back(9);
+
+	b.push_back(5);
 	b.push_back(6);
 	b.push_back(7);
 	b.push_back(4);
-	e.push_back(13);
+
+	e.push_back(9);
 	e.push_back(10);
 	e.push_back(11);
 	e.push_back(8);
+
+	d.push_back(13);
 	d.push_back(14);
 	d.push_back(15);
-	d.push_back(0);
 	d.push_back(12);
 	arr.push_back(a);
 	arr.push_back(b);
 	arr.push_back(e);
 	arr.push_back(d);
+	//0 1 2 3
+	//5 6 7 4
+	//9 10 11 8
+	//13 14 15 12
 	int solu[4][4] =
 	{
 		{1, 2, 3, 4},
@@ -213,12 +220,12 @@ int main()
 		{9, 10, 11, 12},
 		{13, 14, 15, 0}
 	};
-	int r = 3, c = 2;
+	int r = 0, c = 0;
 	std::cout << ";\n";
 	bool check = false;
 	printBoard(arr, solu);
 	//swapping 0, 0 with 1,0 to begin with
-	solve(arr, solu, check, r, c, r, c+1, list);
+	solve(arr, solu, check, r, c, r+1, c, list);
 	std::cout << "\nDone!\n";
 	return 0;
 }
