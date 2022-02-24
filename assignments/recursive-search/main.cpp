@@ -27,8 +27,7 @@ void printBoard(vector<vector<int>> a, int solu[4][4])
 	{
 		for (int c = 0; c < 4; c++)
 			printf("+----");
-		printf("+");
-		printf("\n");
+		printf("+\n");
 		for (int j = 0; j < 4; j++)
 		{
 			printf("|");
@@ -39,8 +38,7 @@ void printBoard(vector<vector<int>> a, int solu[4][4])
 			printf("%4d", a[i][j]);
 			reset();
 		}
-		printf("|");
-		printf("\n");
+		printf("|\n");
 	}
 	for (int i = 0; i < 4; i++)
 		printf("+----");
