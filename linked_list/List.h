@@ -8,6 +8,7 @@ class List
 	public:
 		List();
 		~List();
+		void insert(std::string data);
 		Node* locate(int n);
 		void remove(int n);
 		std::string toString();

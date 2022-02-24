@@ -1,9 +1,12 @@
 #include <iostream>
 #include "List.h"
-
+#include "Node.h"
 List::List()
 {
 	head = nullptr;
+}
+List::~List()
+{
 }
 void List::insert(std::string data)
 {
@@ -29,13 +32,14 @@ void List::remove(int n)
 	int c = 1; // removing the head is a bad idea
 	while (walker != nullptr)
 	{
-		if (c == n)
+		if (c++ == n)
 		{
-			walker->setNext(walker->getNext()->getNext());
+			Node* del = walker->getNext();
+			walker->setNext(del->getNext());
+			delete del;
 			return;
 		}
 		walker = walker->getNext();
-		c++;
 	}
 }
 std::string List::toString()
