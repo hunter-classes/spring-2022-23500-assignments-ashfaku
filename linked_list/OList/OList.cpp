@@ -67,6 +67,7 @@ void OList::remove(int n)
 		walker = walker->getNext();
 		c++;
 	}
+	throw std::out_of_range("Input index is not within range of list size");
 }
 bool OList::contains(int value)
 {
@@ -93,17 +94,34 @@ std::string OList::toString()
 	l += "nullptr";
 	return l;
 }
- // 1 3 8 10
 void OList::reverse()
-{                        // head = 1, future = 3
-	Node *walker = head, future;
-	if (walker != nullptr)
-		future = walker->getNext();
+{
+	Node* future;
+	if (head != nullptr)
+		future = head->getNext();
 	Node* trailer = nullptr;
-	while (walker != nullptr)
+	while (head != nullptr && future != nullptr)
 	{
-		trailer = walker; // trailer= 1 
-		future = walker->getNext(); // future = 3
-		walker->setNext(trailer); //1 point to 1
+		if (head->getNext() == nullptr)
+		{
+			std::cout << "Done?" << std::endl;
+			head->setNext(future);
+			break;
+		}
+		trailer = head;
+		head = head->getNext();
+		if (head != nullptr)
+		{
+			future = head->getNext();
+			Node* hold;
+			if (future != nullptr)
+				hold = future->getNext();
+			else
+				break;
+			head->setNext(trailer);
+			future->setNext(head);
+			head = hold;
+		}
+		//std::cout << head->getData() << " " << head->getNext()->getData() << " " << head->getNext()->getNext()->getData() << std::endl;
 	}
 }

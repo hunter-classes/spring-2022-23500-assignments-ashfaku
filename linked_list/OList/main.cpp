@@ -17,7 +17,7 @@ int main()
 	//cout << l.get(0) << endl;
 	//cout << l.toString() << endl;
 //	l.remove(3);
-//	cout << l.toString() << endl;
+	cout << l.toString() << endl;
 	l.reverse();
 	cout << l.toString() << endl;
 	return 0;
