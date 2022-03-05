@@ -90,38 +90,33 @@ std::string OList::toString()
 	{
 		l += std::to_string(walker->getData()) + "-->";
 		walker = walker->getNext();
+	//	std::cout << l << std::endl;
 	}
 	l += "nullptr";
 	return l;
 }
 void OList::reverse()
-{
-	Node* future;
+{         // t = -9, f = null, h = -9
+	Node *trailer = head, *future = nullptr;
+	if (head == nullptr)
+		return;
+	if (head != nullptr && head->getNext() != nullptr)
+		head = head->getNext();
 	if (head != nullptr)
 		future = head->getNext();
-	Node* trailer = nullptr;
-	while (head != nullptr && future != nullptr)
+	trailer->setNext(nullptr);
+	if (head != nullptr && trailer != head)
+		head->setNext(trailer);
+	while (future != nullptr && future->getNext() != nullptr)
 	{
-		if (head->getNext() == nullptr)
-		{
-			std::cout << "Done?" << std::endl;
-			head->setNext(future);
-			break;
-		}
-		trailer = head;
-		head = head->getNext();
-		if (head != nullptr)
-		{
-			future = head->getNext();
-			Node* hold;
-			if (future != nullptr)
-				hold = future->getNext();
-			else
-				break;
-			head->setNext(trailer);
-			future->setNext(head);
-			head = hold;
-		}
-		//std::cout << head->getData() << " " << head->getNext()->getData() << " " << head->getNext()->getNext()->getData() << std::endl;
+		trailer = future;
+		future = future->getNext();
+		trailer->setNext(head);
+		head = trailer;
+	}
+	if (future != nullptr)
+	{
+		future->setNext(trailer);
+		head = future;
 	}
 }

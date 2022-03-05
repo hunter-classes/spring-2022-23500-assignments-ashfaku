@@ -14,9 +14,9 @@ int main()
 	l.insert(11);
 	l.insert(-5);
 	l.insert(-9);
-	//cout << l.get(0) << endl;
-	//cout << l.toString() << endl;
-//	l.remove(3);
+	cout << l.get(0) << endl;
+	cout << l.toString() << endl;
+//	l.remove(1);
 	cout << l.toString() << endl;
 	l.reverse();
 	cout << l.toString() << endl;
