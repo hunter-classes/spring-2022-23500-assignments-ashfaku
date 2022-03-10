@@ -93,9 +93,7 @@ vector<int> msort(vector<int> v)
 		left.push_back(v[i]);
 	for (; i < v.size(); i++)
 		right.push_back(v[i]);
-//	print_vector(left);
-//	print_vector(right);
-	return merge(left, right);
+	return merge(msort(left), msort(right));
 }
 int main()
 {
