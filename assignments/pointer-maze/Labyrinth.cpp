@@ -6,12 +6,6 @@ bool isPathToFreedom(MazeCell* start, const std::string& moves)
 	bool b = false, p = false, w = false;
 	while (i < moves.length())
 	{
-		if (start == nullptr)
-		{
-			std::cout << "hi" << std::endl;
-			return false;
-		}
-		//std::cout << moves[i] << std::endl;
 		switch (moves[i])
 		{
 			case 'N':
@@ -27,21 +21,22 @@ bool isPathToFreedom(MazeCell* start, const std::string& moves)
 				start = start->south;
 				break;
 		}
-		if (start->whatsHere == Item::POTION)
-                {
-                        std::cout << "Potion" <<  std::endl;
-                        p = true;
-                }
-                if (start->whatsHere == Item::WAND)
-                {
-                        std::cout << "Wand" << std::endl;
-                        w = true;
-                }
-                if (start->whatsHere == Item::SPELLBOOK)
-                {
-                        std::cout << "Book" << std::endl;
-                        b = true;
-                }
+		if (start == nullptr)
+			return false;
+		switch (start->whatsHere)
+		{
+			case Item::POTION:
+				p = true;
+				break;
+			case Item::WAND:
+				w = true;
+				break;
+			case Item::SPELLBOOK:
+				b = true;
+				break;
+			default:
+				break;
+		}
 		i++;
 	}
 	return b && p && w;
