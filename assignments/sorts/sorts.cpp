@@ -44,7 +44,7 @@ vector<int> ssort(vector<int> a)
 
 /*
   left and right are already sorted
-  merged should be a new vector with all the
+3  merged should be a new vector with all the
   elements in left and right, and result
   should be sorted
 */
@@ -95,11 +95,42 @@ vector<int> msort(vector<int> v)
 		right.push_back(v[i]);
 	return merge(msort(left), msort(right));
 }
+void qsort(vector<int>& a, int left, int right)
+{
+	if (right - left <= 0) // nothing to do
+		return;
+	int pivotIndex, mid = (right + left) / 2;
+	if (a[left] >= a[right] && a[left] >= a[mid])
+		pivotIndex = left;
+	else if (a[mid] >= a[left] && a[mid] >= a[right])
+		pivotIndex = mid;
+	else
+		pivotIndex = right;
+	int pivot = a[pivotIndex], index = left - 1;
+	for (int i = left; i <= right; i++)
+	{
+		if (a[i] < pivot)
+		{
+			index++;
+			int hold = a[i];
+			a[i] = a[index];
+			a[index] = hold;
+		}
+	}
+	if (mid == left || mid == right)
+		return;
+	qsort(a, left, index);
+	qsort(a, index + 1, right);
+}
 int main()
 {
-	vector<int> left = {1,2,5,6,10,15};
-	vector<int> right = {3,7,8,12,16,19,20};
-	vector<int> mort = {3,5,1,3,10};
-	print_vector(msort(mort));
+	vector<int> left = {3,2,1, 4};
+	vector<int> right = {};
+	vector<int> mort = {10,9,8,7,6,5,4,3,2,1,0,-1,2,-3};
+	//cout << mort.size();
+	qsort(mort, 0, mort.size() - 1);
+	qsort(left, 0, left.size() - 1);
+	print_vector(mort);
+	print_vector(left);
 	return 0;
 }
