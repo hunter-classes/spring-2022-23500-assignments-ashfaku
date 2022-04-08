@@ -95,9 +95,114 @@ vector<int> msort(vector<int> v)
 		right.push_back(v[i]);
 	return merge(msort(left), msort(right));
 }
+std::vector<int> qsort(std::vector<int> list)
+{
+
+    int i, j;
+
+    // base case
+    if (list.size() <= 1)
+    {
+        return list;
+    }
+
+    // select a pivot value.
+    // for now, just pick list[0]
+    int pivot = list[0];
+
+    // make 2 new vectors
+    std::vector<int> lower, higher;
+
+    // copy all the values < pivot value to lower
+    // copy all the values >= pivot value to higher;
+    for (i = 1; i < list.size(); i++)
+    {
+        if (list[i] < pivot)
+        {
+            lower.push_back(list[i]);
+        }
+        else
+        {
+            higher.push_back(list[i]);
+        }
+    }
+
+    lower = qsort(lower);
+    higher = qsort(higher);
+
+    // copy everything back into list
+    for (i = 0; i < lower.size(); i++)
+    {
+        list[i] = lower[i];
+    }
+
+    list[i] = pivot;
+    i++;
+
+    for (j = 0; j < higher.size(); j++)
+    {
+        list[i] = higher[j];
+        i++;
+    }
+
+    // return the sorted list
+    return list;
+}
+bool check(vector<int> a, int left, int right)
+{
+	for (int i = left; i < right - 1; i++)
+		if (a[i] > a[i+1])
+			return false;
+	return true;
+}
+
+void swap(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// from https://www.geeksforgeeks.org
+int partition(std::vector<int> &arr, int l, int h)
+{
+    int x = arr[h];
+    int i = (l - 1);
+ 
+    for (int j = l; j <= h - 1; j++) {
+        if (arr[j] <= x) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[h]);
+    return (i + 1);
+}
+ 
+/* A[] --> Array to be sorted,
+l --> Starting index,
+h --> Ending index */
+void qsort(std::vector<int> &A, int l, int h)
+{
+    if (l < h) {
+        /* Partitioning index */
+        int p = partition(A, l, h);
+        qsort(A, l, p - 1);
+        qsort(A, p + 1, h);
+    }
+}
+
+
+
+/*
+this did not work for some data sets
 void qsort(vector<int>& a, int left, int right)
 {
-	if (right - left <= 0) // nothing to do
+	if (check(a, left, right))
+	{
+		return;
+	}
+	if (right - left <= 0)
 		return;
 	int pivotIndex, mid = (right + left) / 2;
 	if (a[left] >= a[right] && a[left] >= a[mid])
@@ -119,18 +224,18 @@ void qsort(vector<int>& a, int left, int right)
 	}
 	if (mid == left || mid == right)
 		return;
+	print_vector(a);
+	cout << left << " " << right << endl;
 	qsort(a, left, index);
-	qsort(a, index + 1, right);
-}
+	qsort(a, index, right);
+}*/
 int main()
 {
-	vector<int> left = {3,2,1, 4};
-	vector<int> right = {};
-	vector<int> mort = {10,9,8,7,6,5,4,3,2,1,0,-1,2,-3};
-	//cout << mort.size();
-	qsort(mort, 0, mort.size() - 1);
-	qsort(left, 0, left.size() - 1);
-	print_vector(mort);
-	print_vector(left);
+	srand(time(NULL));
+	vector<int> a;
+	for (int i = 0; i < 1000000; i++)
+		a.push_back(rand() % 100);
+	qsort(a, 0, a.size() - 1);
+	print_vector(a);
 	return 0;
 }
