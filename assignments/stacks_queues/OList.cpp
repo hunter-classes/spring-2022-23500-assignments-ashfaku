@@ -20,7 +20,7 @@ void OList::insert(int value)
 	Node *newNode = new Node(value);
 	Node *walker = head;
 	Node* trailer = nullptr;
-	while (walker != nullptr && walker->getData() <= value)
+	while (walker != nullptr)
 	{
 		trailer = walker;
 		walker = walker->getNext();

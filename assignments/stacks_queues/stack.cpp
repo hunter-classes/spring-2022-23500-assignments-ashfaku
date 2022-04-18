@@ -4,7 +4,6 @@
 void Stack::push(int item)
 {
 	dataList.insert(item);
-	//a[topindex] = item;
 	topindex++;
 }
 
