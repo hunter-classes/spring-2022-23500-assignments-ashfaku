@@ -12,6 +12,7 @@ class Queue
 //		Node *head, *tail;
 		int arr[7];
 		int head, tail;
+		bool full;
 	//     node1-->node2-->node3-->null
 	// head--^                ^-----------tail
 
@@ -20,7 +21,9 @@ class Queue
 		void enqueue(int d);
 		int dequeue();
 		int front();
-		std::string get_debug_string();
+		bool is_empty();
+		bool is_full();
+		std::string print();
 
 };
 

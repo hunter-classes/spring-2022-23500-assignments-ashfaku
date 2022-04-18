@@ -2,7 +2,10 @@
 #include "doctest.h"
 #include "stack.h"
 #include "queue.h"
+#include <iostream>
 
+using std::cout;
+using std::endl;
 using std::out_of_range;
 
 Stack *l = new Stack();
@@ -31,6 +34,33 @@ TEST_CASE("Stack push(int), pop(), top(), and is_empty() tests")
 	CHECK(l->is_empty());
 	delete l;
 }
-TEST_CASE("Queue tests")
+TEST_CASE("Queue operations")
 {
+	Queue *q = new Queue();
+	CHECK_THROWS_AS(q->dequeue(), out_of_range);
+	CHECK_THROWS_AS(q->front(), out_of_range);
+	CHECK(q->is_empty());
+	CHECK(!q->is_full());
+	for(int i = 0; i < 6; i++)
+		 q->enqueue(i);
+	q->enqueue(6);
+	// 0 1 2 3 4 5 6
+	cout << q->print() << endl;
+/*	CHECK_THROWS_AS(q->enqueue(99), out_of_range);
+	CHECK(q->is_full());
+	CHECK(!q->is_empty());
+	CHECK(q->front() == 0);
+	CHECK(q->dequeue() == 0);
+	cout << q->print() << endl;
+	q->enqueue(7);
+	cout << q->print() << endl;
+	//cout << "print: " << q->print() << endl;
+	for(int i = 1; i < 8; i++)
+		 CHECK(q->dequeue() == i);
+	CHECK_THROWS_AS(q->dequeue(), out_of_range);
+	CHECK(q->is_empty());
+
+	delete q, q = nullptr;
+*/
 }
+

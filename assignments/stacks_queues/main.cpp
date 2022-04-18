@@ -1,11 +1,12 @@
 #include <iostream>
 #include <unistd.h>
 #include "stack.h"
+#include "queue.h"
 using std::cout;
 using std::endl;
 int main()
 {
-	Stack *l = new Stack();
+/*	Stack *l = new Stack();
 	cout << "Empty stack? " << (l->is_empty() ? "Yes" : "No") << endl;
 	l->push(3);
 	cout << "Pushed this element as first one: " << l->top() << endl;
@@ -32,5 +33,27 @@ int main()
 		cout << e.what() << endl;
 	}
 	delete l;
+*/
+	Queue *q = new Queue();
+/*	q->enqueue(1);
+	q->enqueue(3);
+	q->enqueue(7);
+	cout << q->dequeue() << endl;
+	cout << q->dequeue() << endl;
+*/
+	q->enqueue(9);
+	q->enqueue(11);
+	q->enqueue(12);
+	q->enqueue(13);
+	q->enqueue(14);
+	q->enqueue(15);
+	q->enqueue(16);
+	cout << q->print() << endl;
+	cout << q->dequeue() << endl;
+	q->enqueue(1);
+	cout << q->print() << endl;
+	q->enqueue(1);
+//	cout << q->dequeue() << endl
+//	cout << q->print() << endl;
 	return 0;
 }
