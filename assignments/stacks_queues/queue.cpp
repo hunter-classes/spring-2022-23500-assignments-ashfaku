@@ -15,22 +15,30 @@ Queue::Queue()
 std::string Queue::print()
 {
 	std::string result = "";
-	cout << head << " " << tail << endl;
+//	cout << head << " " << tail << endl;
 	for (int i = head; i < tail; i++)
 	{
 		result += std::to_string(arr[i]) + " ";
 	}
 	return result;
 }
-
+// 1 2 3 4 5
+// null null 3 4 5 
 void Queue::enqueue(int data)
 {
 	if (full)
 		throw std::out_of_range("Full queue");
+	if (head > 0)
+	{
+		for (int i = 0; i < tail - head; i++)
+			arr[i] = arr[i+head];
+		tail -= head;
+		head = 0;
+	}
 	arr[tail] = data;
-//	cout << tail << " " << head << endl;
-	full = (tail = (tail + 1) % 7) == head;
-	cout << "Tail: " << tail << " " << full <<  endl;
+	tail++;
+	full = (tail == 7 && head == 0);
+//	cout << "Tail: " << tail << " " << full <<  endl;
 }
 int Queue::dequeue()
 {
@@ -39,12 +47,13 @@ int Queue::dequeue()
 		throw std::out_of_range("Cannot dequeue from empty queue");
 	}
 	int r = front();
-	full = (head = (head + 1) % 7) == tail;
+	head++;
+	full = false;
 	return r;
 }
 int Queue::front()
 {
-	cout << head << " " << tail << endl;
+//	cout << head << " " << tail << endl;
 	if (head == tail)
 	{
 		throw std::out_of_range("Cannot get front of empty queue");

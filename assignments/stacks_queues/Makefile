@@ -24,4 +24,4 @@ Node.o: Node.cpp Node.h
 	g++ -c Node.cpp
 
 clean:
-	rm -f main.o stack.o
+	rm -f *.o
