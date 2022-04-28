@@ -1,5 +1,5 @@
 #include "Node.h"
-#include "bstree.h"
+#include "BSTree.h"
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -21,7 +21,7 @@ int main()
 	cout << left->getLeft()->getData() << " " << left->getRight()->getData() << " " << right->getLeft()->getData() << " " <<
 	right->getRight()->getData() << endl;
 	
-	BsTree *t = new BsTree();
+	BSTree *t = new BSTree();
 	t->setup();
 	cout << t->get_debug_string() << endl;
 

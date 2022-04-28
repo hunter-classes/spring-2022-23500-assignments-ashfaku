@@ -1,12 +1,12 @@
 #pragma once
 #include <iostream>
 #include "Node.h"
-class BsTree
+class BSTree
 {
 	private:
 		Node* root;
 	public:
-		BsTree();
+		BSTree();
 		void insert(int data);
 		std::string get_debug_string();
 		void setup();

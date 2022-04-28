@@ -1,10 +1,10 @@
-#include "bstree.h"
+#include "BSTree.h"
 
-BsTree::BsTree()
+BSTree::BSTree()
 {
 	root = nullptr;
 }
-void BsTree::insert(int data)
+void BSTree::insert(int data)
 {
 }
 std::string get_debug_string_helper(Node *root)
@@ -22,11 +22,11 @@ std::string get_debug_string_helper(Node *root)
 		return std::to_string(data) + get_debug_string_helper(left);
 	return std::to_string(data) + get_debug_string_helper(left) + get_debug_string_helper(right);
 }
-std::string BsTree::get_debug_string()
+std::string BSTree::get_debug_string()
 {
 	return get_debug_string_helper(root);
 }
-void BsTree::setup()
+void BSTree::setup()
 {
 	root = new Node(1);
 	Node *l = new Node(2), *r = new Node(3);
