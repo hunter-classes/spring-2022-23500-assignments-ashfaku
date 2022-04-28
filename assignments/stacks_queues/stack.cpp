@@ -34,3 +34,8 @@ bool Stack::is_empty()
 {
 	return (dataList.toString() == "head-->nullptr");
 }
+bool Stack::is_full()
+{
+	return false;
+	// ... a stack can never be full so long as there's memory? I didn't know what to do here
+}

@@ -11,4 +11,5 @@ class Stack
 		int pop();
 		int top();
 		bool is_empty();
+		bool is_full();
 };
