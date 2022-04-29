@@ -57,7 +57,7 @@ int Queue::front()
 }
 bool Queue::is_empty()
 {
-	return !full;
+	return head == tail;
 }
 bool Queue::is_full()
 {
