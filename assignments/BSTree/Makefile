@@ -2,8 +2,8 @@
 main: main.o Node.o BSTree.o
 	g++ -o main main.o Node.o BSTree.o
 
-tests: tests.o Node.o
-	g++ -o tests tests.o Node.o
+tests: tests.o Node.o BSTree.o
+	g++ -o tests tests.o Node.o BSTree.o
 
 tests.o: tests.cpp doctest.h
 	g++ -c tests.cpp
