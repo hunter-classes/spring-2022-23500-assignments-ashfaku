@@ -27,18 +27,8 @@ int main()
 	t->rinsert(10);
 	t->rinsert(5);
 	t->rinsert(-3);
-	cout << "Try: " << t->get_debug_string() << endl;
-/*	Node *root = t->getRoot();
-	cout << root->getData() << endl;
-	t->insert(5);
-	//cout << root->getLeft() << endl;
-	t->insert(-5);
-	cout << root->getLeft()->getData() << endl;
-	t->insert(-3);
-	cout << root->getLeft()->getRight()->getData() << endl;
-	t->insert(3);
-	cout << root->getRight()->getLeft()->getData() << endl;
-	t->insert(2);
-	cout << root->getRight()->getLeft()->getLeft()->getData() << endl;
-*/	return 0;
+	t->rinsert(15);
+	t->rinsert(-5);
+	cout << t->get_debug_string() << endl;
+	return 0;
 }
