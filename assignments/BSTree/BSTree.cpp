@@ -78,7 +78,7 @@ void BSTree::insert(int value) // iterative insert
 			return;
 		}
 		else if (p->getData() < value)
-		{
+B		{
 			p = p->getRight();
 		}
 		else
@@ -109,7 +109,7 @@ void BSTree::insert(int value) // iterative insert
 		}
 	}
 }
-std::string get_debug_string_helper(Node *root)
+std::string BSTree::get_debug_string_helper(Node *root)
 {
 	if (root == nullptr)
 		return "";
