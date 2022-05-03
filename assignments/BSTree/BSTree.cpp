@@ -10,6 +10,71 @@ Node* BSTree::getRoot()
 {
 	return root;
 }
+//                  1
+//                        2
+//                              4
+//                         3          9
+//                                5         10
+//                            4.5   6     9.5     11
+void BSTree::deleteNode(int value, Node **current, Node **parent, bool& check)
+{
+	if (root == nullptr)
+                throw 1;
+	if (!check)
+		return;
+        int data = (*current)->getData();
+	Node* left = (*current)->getLeft();
+	Node* right = (*current)->getRight();
+	if (data == value)
+	{
+		if (left != nullptr && right != nullptr)
+		{
+			Node* hold = right;
+			while (right->getLeft() != nullptr)
+				right = right->getLeft();
+			(*current)->setData(right->getData());
+			bool check1 = true;
+			deleteNode(right->getData(), &hold, current, check1);
+			(*current)->setRight(hold);
+			(*current)->setLeft(left);
+		}
+		else
+		{
+			if (*current == root)
+			{
+				if (left == nullptr)
+					root = right;
+				else if (right == nullptr)
+					root = left;
+				else
+					root = nullptr;
+				return;
+			}
+			if (parent != nullptr && *parent != nullptr)
+			{
+				if (data > (*parent)->getData())
+					(*parent)->setRight(left);
+				else
+					(*parent)->setLeft(right);
+			}
+			delete *current;
+			*current = nullptr;
+			current = nullptr;
+		}
+		check = false;
+                return;
+        }
+	if (!check)
+		return;
+	if (data < value)
+                deleteNode(value, &right, current, check);
+	deleteNode(value, &left, current, check);
+}
+void BSTree::deleteNode(int value)
+{
+	bool check = true;
+	deleteNode(value, &root, nullptr, check);
+}
 int BSTree::rsearch(int value, Node *root)
 {
 	if (root == nullptr)
@@ -78,7 +143,7 @@ void BSTree::insert(int value) // iterative insert
 			return;
 		}
 		else if (p->getData() < value)
-B		{
+		{
 			p = p->getRight();
 		}
 		else
@@ -119,10 +184,10 @@ std::string BSTree::get_debug_string_helper(Node *root)
 	if (left == nullptr && right == nullptr)
 		return std::to_string(data);
 	if (left == nullptr)
-		return std::to_string(data) + get_debug_string_helper(right);
+		return std::to_string(data) + " " + get_debug_string_helper(right);
 	if (right == nullptr)
-		return std::to_string(data) + get_debug_string_helper(left);
-	return std::to_string(data) + get_debug_string_helper(left) + get_debug_string_helper(right);
+		return std::to_string(data) + " " + get_debug_string_helper(left);
+	return std::to_string(data) + " " + get_debug_string_helper(left) + " " + get_debug_string_helper(right);
 }
 std::string BSTree::get_debug_string()
 {

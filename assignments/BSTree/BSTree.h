@@ -7,7 +7,8 @@ class BSTree
 		Node* root;
 		void rinsert(int value, Node **root, bool& check);
 		int rsearch(int value, Node *root);
-		std::string get_debug_string_helper();
+		std::string get_debug_string_helper(Node* root);
+		void deleteNode(int value, Node** root, Node ** parent, bool& check);
 	public:
 		BSTree();
 		void insert(int data);
@@ -15,5 +16,6 @@ class BSTree
 		void rinsert(int value);
 		std::string get_debug_string();
 		Node * getRoot();
+		void deleteNode(int value);
 		void setup();
 };

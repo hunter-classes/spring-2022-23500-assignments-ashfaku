@@ -22,13 +22,30 @@ int main()
 	right->getRight()->getData() << endl;
 */
 	BSTree *t = new BSTree();
-
-	t->rinsert(1);
+	//                       10
+	//               5                 15
+	//           2        7       12          20
+	//         1   3    6   9             18       22
+	//                                       19
+	// 10 5 2 1 3 7 6 9 18 12 20 22
 	t->rinsert(10);
-	t->rinsert(5);
-	t->rinsert(-3);
 	t->rinsert(15);
-	t->rinsert(-5);
+	t->rinsert(5);
+	t->rinsert(7);
+	t->rinsert(2);
+	t->rinsert(12);
+	t->rinsert(20);
+	t->rinsert(1);
+	t->rinsert(3);
+	t->rinsert(6);
+	t->rinsert(9);
+	t->rinsert(18);
+	t->rinsert(22);
+	t->rinsert(19);
+	cout << t->get_debug_string() << endl;
+	t->deleteNode(10);
+	cout << "Check: " << t->getRoot()->getData() << endl;
 	cout << t->get_debug_string() << endl;
 	return 0;
 }
+
