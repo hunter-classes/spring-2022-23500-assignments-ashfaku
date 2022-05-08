@@ -49,3 +49,56 @@ TEST_CASE("Tree rsearch")
 	CHECK_THROWS_AS(tree->rsearch(-15), int);
 	CHECK_THROWS_AS(tree->rsearch(3), int);
 }
+TEST_CASE("Tree deletion")
+{
+        BSTree* t = new BSTree();
+        t->rinsert(15);
+        t->rinsert(10);
+        t->rinsert(20);
+        t->rinsert(17);
+        t->rinsert(12);
+        t->deleteNode(15);
+        CHECK(t->getRoot()->getData() == 17);
+	t->deleteNode(10);
+	CHECK(t->getRoot()->getLeft()->getData() == 12);
+	CHECK(t->getRoot()->getRight() != nullptr);
+	t->deleteNode(20);
+	CHECK(t->getRoot()->getRight() == nullptr);
+	CHECK(t->getRoot()->getLeft() != nullptr);
+	t->deleteNode(12);
+	CHECK(t->getRoot()->getLeft() == nullptr);
+	t->deleteNode(17);
+	CHECK(t->getRoot() == nullptr);
+	try
+	{
+		t->deleteNode(1);
+	}
+	catch (int e)
+	{
+		CHECK(e == 1);
+	}
+	t->rinsert(20);
+	try
+	{
+		t->deleteNode(17);
+	}
+	catch (int e)
+	{
+		CHECK(e == 1);
+	}
+	t->rinsert(50);
+	t->rinsert(0);
+	t->rinsert(25);
+	t->rinsert(10);
+	t->deleteNode(10);
+	CHECK(t->getRoot()->getLeft()->getRight() == nullptr);
+	t->deleteNode(50);
+	CHECK(t->getRoot()->getRight()->getData() == 25);
+	t->deleteNode(20);
+	CHECK(t->getRoot()->getData() == 25);
+}
+
+
+
+
+

@@ -18,7 +18,7 @@ Node* BSTree::getRoot()
 //                            4.5   6     9.5     11
 void BSTree::deleteNode(int value, Node **current, Node **parent, bool& check)
 {
-	if (root == nullptr)
+	if (*current == nullptr && check)
                 throw 1;
 	if (!check)
 		return;
