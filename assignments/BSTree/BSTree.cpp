@@ -33,7 +33,7 @@ int BSTree::height(Node* head)
 //	5		25
 
 
-//2^(height-1)
+//2^(height-level)
 
 
 //height 3, 4 tab
@@ -50,35 +50,52 @@ int BSTree::height(Node* head)
 //	1		3		6		8		11		13		26			28
 
 
-
-
-
-//            1
-//      -5          10
-void BSTree::print(Node* head, int h, char direction)
+int BSTree::getRightNode()
+{
+	Node* hold = root;
+	while (hold->getRight() != nullptr)
+		hold = hold->getRight();
+	return hold->getData();
+}
+void BSTree::level(Node* root, int lev, int tab)
+{
+//	cout << lev << endl;
+	if (lev == 1)
+	{
+//		if (root != nullptr && root->getData() == getRightNode())
+//			tab /= 2;
+		// my very last recursive branch has double the tabs it should have... not at all sure how to fix that
+//		cout << "HI" << endl;
+		for (int i = 0; i < tab; i++)
+			cout << "\t";
+		if (root != nullptr)
+			cout << root->getData();
+		return;
+	}
+	else
+	{
+		level(root == nullptr ? nullptr : root->getLeft(), lev - 1, tab/2);
+			//cout << lev << endl;
+		level(root == nullptr ? nullptr : root->getRight(), lev - 1, tab);
+	}
+}
+void BSTree::print(Node* head, int h)
 {
 	if (root == nullptr)
 		return;
 	int pow = std::pow(2, h - 1);
-	for (int i = 0; i < pow; i++)
-		cout << "\t";
-	if (head != nullptr)
-		cout << head->getData();
-	// if right most child in that row........? new line?
-	if (direction == 'r')
-		cout << "\n";
-	if (head == nullptr)
-		return;
-
-
-	print(head->getLeft(), h - 1, 'l');
-//	cout << "Hi" << endl;
-//	print(head->getRight(), h, 'r');
+	//cout << pow << endl;
+	for (int i = 0; i < h; i++)
+	{
+		level(root, i+1, pow);
+		cout << endl;
+	}
 }
 void BSTree::print()
 {
 	int h = height(root);
-	print(root, h, 'r');
+//	cout << h << endl;
+	print(root, h);
 }
 void BSTree::deleteNode(int value, Node **current, Node **parent, bool& check)
 {

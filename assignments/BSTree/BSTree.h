@@ -9,8 +9,10 @@ class BSTree
 		int rsearch(int value, Node *root);
 		std::string get_debug_string_helper(Node* root);
 		void deleteNode(int value, Node** root, Node ** parent, bool& check);
-		void print(Node* head, int height, char direction);
+		void print(Node* head, int height);
 		int height(Node* head);
+		int getRightNode();
+		void level(Node* root, int lev, int tab);
 	public:
 		BSTree();
 		void insert(int data);
