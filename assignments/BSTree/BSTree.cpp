@@ -1,5 +1,6 @@
 #include "BSTree.h"
 #include <iostream>
+#include <cmath>
 using std::cout;
 using std::endl;
 BSTree::BSTree()
@@ -10,12 +11,75 @@ Node* BSTree::getRoot()
 {
 	return root;
 }
-//                  1
-//                        2
-//                              4
-//                         3          9
-//                                5         10
-//                            4.5   6     9.5     11
+int BSTree::height()
+{
+	return height(root);
+}
+int BSTree::height(Node* head)
+{
+	if (head == nullptr)
+		return 0;
+	if (head->getLeft() == nullptr && head->getRight() == nullptr)
+		return 1;
+	return 1 + std::max(height(head->getLeft()), height(head->getRight()));
+}
+
+// height 1, 1 tab
+//	10
+
+
+//height 2, 2 tab
+//		10
+//	5		25
+
+
+//2^(height-1)
+
+
+//height 3, 4 tab
+//				10
+//		5				25
+//	2		7		12		26
+
+
+
+// height 4, 8 tab
+//								10
+//				5								25
+//		2				7				12				27
+//	1		3		6		8		11		13		26			28
+
+
+
+
+
+//            1
+//      -5          10
+void BSTree::print(Node* head, int h, char direction)
+{
+	if (root == nullptr)
+		return;
+	int pow = std::pow(2, h - 1);
+	for (int i = 0; i < pow; i++)
+		cout << "\t";
+	if (head != nullptr)
+		cout << head->getData();
+	// if right most child in that row........? new line?
+	if (direction == 'r')
+		cout << "\n";
+	if (head == nullptr)
+		return;
+
+
+	print(head->getLeft(), h - 1, 'l');
+//	cout << "Hi" << endl;
+//	print(head->getRight(), h, 'r');
+}
+void BSTree::print()
+{
+	int h = height(root);
+	print(root, h, 'r');
+}
 void BSTree::deleteNode(int value, Node **current, Node **parent, bool& check)
 {
 	if (*current == nullptr && check)
