@@ -97,10 +97,10 @@ TEST_CASE("Tree deletion")
 	t->deleteNode(20);
 	CHECK(t->getRoot()->getData() == 25);
 }
-//				10
-//		-10				30
-//	-15		-5		25		35
-//	            -6
+//								10
+//				-10								30
+//		-15				-5				25				35
+//			-6
 TEST_CASE("Tree countleaves")
 {
 	BSTree* t = new BSTree();
@@ -120,10 +120,27 @@ TEST_CASE("Tree countleaves")
 	t->rinsert(-6);
 	CHECK(t->countLeaves() == 4);
 }
+
+//								10
+//				-10								30
+//										15				35
+//								14
 TEST_CASE("Tree height")
 {
-	// TODO
+	BSTree* t = new BSTree();
+	CHECK(t->height() == 0);
+	t->rinsert(10);
+	CHECK(t->height() == 1);
+	t->rinsert(30);
+	CHECK(t->height() == 2);
+	t->rinsert(-10);
+	CHECK(t->height() == 2);
+	t->rinsert(15);
+	CHECK(t->height() == 3);
+	t->rinsert(14);
+	CHECK(t->height() == 4);
+	t->rinsert(40);
+	CHECK(t->height() == 4);
+
 }
-
-
 

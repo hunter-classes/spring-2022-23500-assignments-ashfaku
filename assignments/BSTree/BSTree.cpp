@@ -116,24 +116,25 @@ void BSTree::printLevel(Node* root, int lev, int tab, int c)
 */
 void BSTree::print(Node* head, int h, char d)
 {
-/*	if (root == nullptr)
+/*	if (head == nullptr)
 		return;
 	int pow = std::pow(2, h - 1);
-	//cout << pow << endl;
 	for (int i = 0; i < h; i++)
 	{
-		level(root, i+1, pow, 0);
+		printLevel(root, i+1, pow, 0);
 		cout << endl;
 	}
 */
-	if (head == nullptr)
+	if (root == nullptr)
 		return;
 	if (h > 0)
 		cout << "|";
 	for (int i = 0; i < h; i++)
 		cout << "\t";
 	cout << (d == 'l' ? "Left " : (d == 'r' ? "Right " : "Head "));
-	cout <<  head->getData() << endl << "|" << endl;
+	cout <<  (head == nullptr ? "null" : std::to_string(head->getData())) << endl << "|" << endl;
+	if (head == nullptr)
+		return;
 	print(head->getLeft(), h+1, 'l');
 	print(head->getRight(), h+1, 'r');
 }
