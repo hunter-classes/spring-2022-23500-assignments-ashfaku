@@ -29,16 +29,19 @@ int main()
 
 	t->rinsert(1);
 
-	t->rinsert(10);
+	t->rinsert(14);
 	t->rinsert(-5);
-//	t->rinsert(15);
+	t->rinsert(15);
 	t->rinsert(9);
 	t->rinsert(-10);
 	t->rinsert(-3);
 	t->rinsert(-1);
-//	t->rinsert(25);
-//	t->rinsert(12);
-//	cout << t->getRoot()->getRight()->getRight()->getData() << endl;
+	t->rinsert(25);
+	t->rinsert(12);
+	t->rinsert(-7);
+	t->rinsert(-4);
+	t->rinsert(10);
+	cout << t->countLeaves() << endl;
 	t->print();
 //	cout << t->get_debug_string() << endl;
 //	t->deleteNode(10);
