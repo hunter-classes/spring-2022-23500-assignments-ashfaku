@@ -1,18 +1,19 @@
 #include <iostream>
 #include "Person.h"
 
-Person::Person(std::string first, std::string last, int num)
+int Person::id = 0;
+
+Person::Person(std::string first, std::string last)
 {
 	this->first = first;
 	this->last = last;
-	this->idnum = num;
+	this->idnum = id;
+	id++;
 }
-
-std::string Person::get_name()
+std::string Person::getName()
 {
 	return last + ", " + first;
 }
-
 int Person::get_id()
 {
 	return idnum;

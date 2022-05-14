@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Node.h"
+#include "Person.h"
 class OList
 {
 	private:
@@ -8,10 +9,10 @@ class OList
 	public:
 		OList();
 		~OList();
-		void insert(int value);
+		void insert(Person* value);
 		std::string toString();
-		bool contains(int value);
-		int get(int n);
-		void remove(int loc);
+		bool contains(Person* value);
+		Person* get(int n);
+		void remove(int n);
 		void reverse();
 };

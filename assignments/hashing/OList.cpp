@@ -12,10 +12,11 @@ OList::~OList()
 	{
 		trailer = head;
 		head = head->getNext();
+		delete trailer->getData();
 		delete trailer;
 	}
 }
-void OList::insert(int value)
+void OList::insert(Person* value)
 {
 	Node *newNode = new Node(value);
 	Node *walker = head;
@@ -36,7 +37,7 @@ void OList::insert(int value)
 		newNode->setNext(walker);
 	}
 }
-int OList::get(int loc)
+Person* OList::get(int loc)
 {
 	int c = 0;
 	Node *walker = head;
@@ -52,6 +53,12 @@ int OList::get(int loc)
 void OList::remove(int n)
 {
 	Node* walker = head;
+	if (n == 0)
+	{
+		head = walker->getNext();
+		delete walker;
+		return;
+	}
 	int c = 1; // removing the head is a bad idea
 	while (walker != nullptr)
 	{
@@ -67,7 +74,7 @@ void OList::remove(int n)
 	}
 	throw std::out_of_range("Input index is not within range of list size");
 }
-bool OList::contains(int value)
+bool OList::contains(Person* value)
 {
 	Node* walker = head;
 	while (walker != nullptr)
@@ -86,9 +93,8 @@ std::string OList::toString()
 	std::string l = "head-->";
 	while (walker != nullptr)
 	{
-		l += std::to_string(walker->getData()) + "-->";
+		l += walker->getData()->getName() + "-->";
 		walker = walker->getNext();
-	//	std::cout << l << std::endl;
 	}
 	l += "nullptr";
 	return l;

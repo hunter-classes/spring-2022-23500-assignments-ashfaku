@@ -1,19 +1,19 @@
 #include <iostream>
 #include "Node.h"
 
-Node::Node(int data)
+Node::Node(Person* data)
 {
 	this->data = data;
 	this->next = nullptr;
 }
 
-Node::Node(int data, Node *next)
+Node::Node(Person* data, Node *next)
 {
 	this->data = data;
 	this->next = next;
 }
 
-int Node::getData()
+Person* Node::getData()
 {
 	return this->data;
 }
@@ -23,7 +23,7 @@ Node *Node::getNext()
 	return this->next;
 }
 
-void Node::setData(int data)
+void Node::setData(Person* data)
 {
 	this->data = data;
 }
