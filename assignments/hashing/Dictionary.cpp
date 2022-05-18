@@ -6,9 +6,8 @@
 Dictionary::Dictionary()
 {
 	size = 10;
-	for (int i=0; i<getSize(); i++){
+	for (int i=0; i < getSize(); i++)
 		list[i] = new OList();
-	}
 }
 Dictionary::~Dictionary()
 {
@@ -37,9 +36,10 @@ int Dictionary::getSize()
 {
 	return size;
 }
-void Dictionary::insertPerson(Person *&p){
-	//Linear Probing
-	try{
+void Dictionary::insertPerson(Person *&p)
+{
+	try
+	{
 		std::string name = p->get_name();
 		int hash = 0;
 		for (int i=0; i < name.length(); i++)
@@ -77,10 +77,11 @@ Person* Dictionary::retrievePerson(Person *&p)
 	{
 		std::cout << "Error in retrieving Person." << std::endl;
 	}
-	throw std::out_of_range("Null value");
+	throw std::out_of_range("Null value"); // or return nullptr? had no clue which one to do here
 }
-std::string Dictionary::getKeys(){
-	std::string keys = "\n";
+std::string Dictionary::getKeys()
+{
+	std::string keys = "";
 	try
 	{
 		int size = getSize();
