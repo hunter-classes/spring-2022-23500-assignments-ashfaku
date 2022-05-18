@@ -1,23 +1,19 @@
 #pragma once
 #include "Person.h"
-class Node
-{
+
+class Node{
 	private:
-		//This could be any data type
-		Person* data;
-		//This will be a pointer for the next Node
-		Node *next;
+	Person* data;
+	Node *next;
+
 	public:
-		//Basic constructors
-		Node();
-		Node(Person* data);
-		Node(Person* data, Node* next);
+	Node();
+	Node(Person* data);
+	Node(Person* data, Node *next);
 
-		//Basic accessor method
-		Person* getData();
-		Node *getNext();
+	void setData(Person* data);
+	void setNext(Node *next);
 
-		//Basic setter method
-		void setData(Person* data);
-		void setNext(Node *next);
+	Person* getData();
+	Node* getNext();
 };

@@ -1,16 +1,19 @@
 #pragma once
-#include "OList.h"
 #include <iostream>
-using std::string;
-class Dictionary
-{
+#include "Node.h"
+#include "Person.h"
+#include "OList.h"
+
+class Dictionary{
 	private:
-		OList* arr[10];
-		int hashIndex(Person* p);
+		OList* list[10];
+		int size;
 	public:
 		Dictionary();
 		~Dictionary();
-		void insert(string first, string last);
-		Person* retrieve(int id_num);
-		string getAllKeys();
+		void insertPerson(Person *&p);
+		void runTests();
+		int getSize();
+		Person* retrievePerson(Person *&p);
+		std::string getKeys();
 };

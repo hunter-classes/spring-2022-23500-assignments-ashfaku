@@ -13,6 +13,8 @@ class OList
 		std::string toString();
 		bool contains(Person* value);
 		Person* get(int n);
+		Node* getHead();
+		void setHead(Node* n);
 		void remove(int n);
 		void reverse();
 };

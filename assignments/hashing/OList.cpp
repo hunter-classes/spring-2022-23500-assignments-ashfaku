@@ -16,6 +16,14 @@ OList::~OList()
 		delete trailer;
 	}
 }
+Node* OList::getHead()
+{
+	return head;
+}
+void OList::setHead(Node* n)
+{
+	head = n;
+}
 void OList::insert(Person* value)
 {
 	Node *newNode = new Node(value);
@@ -93,7 +101,7 @@ std::string OList::toString()
 	std::string l = "head-->";
 	while (walker != nullptr)
 	{
-		l += walker->getData()->getName() + "-->";
+		l += walker->getData()->get_name() + "-->";
 		walker = walker->getNext();
 	}
 	l += "nullptr";
